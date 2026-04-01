@@ -6,6 +6,8 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
+  background-image: url("egghead arc.jpg");
+  background-size: cover;
 }
 .mode-switch button.active {
   background: #000;
