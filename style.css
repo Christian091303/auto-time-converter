@@ -1,117 +1,119 @@
 body {
   font-family: 'Segoe UI', Tahoma, sans-serif;
-  background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
+  background: url("egghead arc.jpg") no-repeat center center fixed; 
+  background-size: cover;               
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
-  background-image: url("egghead arc.jpg");
-  background-size: cover;
-}
-.mode-switch button.active {
-  background: #000;
-  color: #fff;
 }
 
 .container {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.15);  
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   padding: 30px 35px;
   border-radius: 30px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
   text-align: center;
-  width: 380px;
+  width: 370px;
+  padding-bottom: 35px;
 }
 
 h2 {
-  margin-bottom: 20px;
-  font-size: 30px;
-  color: #333;
+  margin-bottom: 30px;
+  font-size: 35px;
+  color: #000000;
   font-family: "Times New Roman", Times, serif;
 }
+
+#value::placeholder {
+  color: rgb(0, 0, 0);         
+}
+
 
 input {
   width: 90%;
   margin: 10px auto;
   display: block;
   padding: 10px 15px;
-  border: 1px solid #a8a8a8;
+  border: 1px solid rgba(255,255,255,0.4);
   border-radius: 15px;
   font-size: 14px;
   box-sizing: border-box;
-}
-
-input, button {
-  width: 100%;
-  padding: 15px;
-  margin: 10px 0;
-  border: 1px solid #a8a8a8;
-  border-radius: 15px;
-  font-size: 15px;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(6px);
+  color: #000000;
 }
 
 input:focus {
-  border-color: #cfcfcf;
+  border-color: rgba(0, 0, 0, 0.6);
   outline: none;
-  box-shadow: 0 0 6px rgba(3, 3, 3, 0.4);
+  box-shadow: 0 0 6px rgba(255,255,255,0.6);
 }
 
-button {
-  background: #000000;
+button,
+.reset-btn {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   color: #ffffff;
-  border: 2px solid #000000;
+  border: 1px solid rgba(255,255,255,0.3);
   font-weight: bold;
   cursor: pointer;
-  transition: 0.5s ease;
-  width: 30%;       
-  max-width: 200px;   
-  padding: 10px;      
-  border-radius: 30px; 
-  font-size: 14px;   
-  margin: 20px auto;  
-  display: block;    
+  transition: all 0.3s ease;
+  width: 40%;
+  max-width: 200px;
+  padding: 10px;
+  border-radius: 30px;
+  font-size: 14px;
+  margin: 20px auto;
+  display: block;
 }
 
-button:hover {
-  background: #ffffff;
-  color: #000000;
-  border: 2px solid #000000;
-  transform: scale(1.05); 
+button:hover,
+.reset-btn:hover {
+  background: rgba(255, 255, 255, 0.4);
+  color: #000;
+  box-shadow: 0 0 15px rgba(255,255,255,0.7);
+  transform: translateY(-2px);
 }
 
 .result {
-  width: 95%;  
+  width: 95%;
   margin-top: 20px;
   font-weight: bold;
   font-size: 16px;
-  color: #444;
-  background: #f9f9f9;
-  padding: 10px;
+  color: #030303;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(6px);
   border-radius: 30px;
-  border: 1px solid #000000;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 10px;
 }
 
 @media (max-width: 768px) {
   .container {
-    width: 90%;          
-    padding: 20px;       
+    width: 90%;
+    padding: 20px;
   }
 
-  input, button {
-    width: 100%;       
-    font-size: 16px;   
+  input, button, .reset-btn {
+    width: 100%;
+    font-size: 16px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 425px) {
   .container {
-    width: 95%;          
-    padding: 15px;   
+    width: 95%;
+    padding: 15px;
   }
 
-  input, button {
-    width: 100%;         
-    font-size: 16px;    
-    border-radius: 10px; 
+  input, button, .reset-btn {
+    width: 100%;
+    font-size: 16px;
+    border-radius: 10px;
   }
 }

@@ -8,104 +8,124 @@
 <body>
   <div class="container">
     <h2>Auto Time Converter</h2>
-    <input type="text" id="value" placeholder="Enter e.g. 12months, 7days, 20weeks, 1year">
-    <button onclick="convert()">Convert</button>
-    <div class="result" id="output"></div>
+
+    <input type="text" id="value" placeholder="Enter 12months, 7days, 20weeks, 1year">
+
+  <div class="btn-group">
+    <button id="mainBtn" onclick="convert()">Convert</button>
+  </div>
+
+  <div class="result" id="output"></div>
   </div>
 
   <script>
-    function convert() {
-      let rawInput = document.getElementById('value').value.trim().toLowerCase();
-      let output = document.getElementById('output');
+  function convert() {
+    let rawInput = document.getElementById('value').value.trim().toLowerCase();
+    let output = document.getElementById('output');
 
-      if (!rawInput) {
-        output.innerHTML = "Please enter a value like 1year, 12months, 17weeks, 10days";
-        return;
-      }
+    if (!rawInput) {
+      output.innerHTML = "Please enter a value like 1year, 12months, 17weeks, 10days";
+      return;
+    }
 
-      // Regex: separate number and unit even without space
-      let match = rawInput.match(/^(\d+)\s*(year|years|month|months|week|weeks|day|days)$/);
-      if (!match) {
-        output.innerHTML = "Invalid format. Example: 1year, 12months, 17weeks, 10days";
-        return;
-      }
+    let match = rawInput.match(/^(\d+)\s*(year|years|month|months|week|weeks|day|days)$/);
+    if (!match) {
+      output.innerHTML = "Invalid format. Example: 1year, 12months, 17weeks, 10days";
+      return;
+    }
 
-      let num = parseInt(match[1]);
-      let unit = match[2];
-      let result = "";
+    let num = parseInt(match[1]);
+    let unit = match[2];
+    let result = "";
 
-      switch(unit) {
-        case "year":
-        case "years":
-          let monthsFromYears = num * 12;
-          let daysFromYears = num * 365;
-          result = `${monthsFromYears} ${monthsFromYears === 1 ? "Month" : "Months"}, ${daysFromYears} ${daysFromYears === 1 ? "Day" : "Days"}`;
-          break;
+    switch(unit) {
+      case "year":
+      case "years":
+        let monthsFromYears = num * 12;
+        let daysFromYears = num * 365;
+        result = `${monthsFromYears} ${monthsFromYears === 1 ? "Month" : "Months"}, ${daysFromYears} ${daysFromYears === 1 ? "Day" : "Days"}`;
+        break;
 
-        case "month":
-        case "months":
-          if (num === 12) {
-            result = "1 Year";
-          } else if (num > 12) {
-            let years = Math.floor(num / 12);
-            let months = num % 12;
-            result = `${years} ${years === 1 ? "Year" : "Years"}${months > 0 ? `, ${months} ${months === 1 ? "Month" : "Months"}` : ""}`;
-          } else {
-            let daysFromMonths = num * 30;
-            let weeks = Math.floor(daysFromMonths / 7);
-            let days = daysFromMonths % 7;
-            let breakdown = [];
-            if (weeks > 0) breakdown.push(`${weeks} ${weeks === 1 ? "Week" : "Weeks"}`);
-            if (days > 0) breakdown.push(`${days} ${days === 1 ? "Day" : "Days"}`);
-            result = breakdown.join(", ");
-          }
-          break;
-
-        case "week":
-        case "weeks":
-          let daysFromWeeks = num * 7;
-          if (daysFromWeeks >= 30) {
-            let months = Math.floor(daysFromWeeks / 30);
-            let remainingDays = daysFromWeeks % 30;
-            let weeks = Math.floor(remainingDays / 7);
-            let days = remainingDays % 7;
-            let breakdown = [];
-            if (months > 0) breakdown.push(`${months} ${months === 1 ? "Month" : "Months"}`);
-            if (weeks > 0) breakdown.push(`${weeks} ${weeks === 1 ? "Week" : "Weeks"}`);
-            if (days > 0) breakdown.push(`${days} ${days === 1 ? "Day" : "Days"}`);
-            result = breakdown.join(", ");
-          } else {
-            result = `${daysFromWeeks} ${daysFromWeeks === 1 ? "Day" : "Days"}`;
-          }
-          break;
-
-        case "day":
-        case "days":
-          let totalDays = num;
-          let years = Math.floor(totalDays / 365);
-          totalDays %= 365;
-
-          let months = Math.floor(totalDays / 30);
-          totalDays %= 30;
-
-          let weeks = Math.floor(totalDays / 7);
-          let days = totalDays % 7;
-
+      case "month":
+      case "months":
+        if (num === 12) {
+          result = "1 Year";
+        } else if (num > 12) {
+          let years = Math.floor(num / 12);
+          let months = num % 12;
+          result = `${years} ${years === 1 ? "Year" : "Years"}${months > 0 ? `, ${months} ${months === 1 ? "Month" : "Months"}` : ""}`;
+        } else {
+          let daysFromMonths = num * 30;
+          let weeks = Math.floor(daysFromMonths / 7);
+          let days = daysFromMonths % 7;
           let breakdown = [];
-          if (years > 0) breakdown.push(`${years} ${years === 1 ? "Year" : "Years"}`);
+          if (weeks > 0) breakdown.push(`${weeks} ${weeks === 1 ? "Week" : "Weeks"}`);
+          if (days > 0) breakdown.push(`${days} ${days === 1 ? "Day" : "Days"}`);
+          result = breakdown.join(", ");
+        }
+        break;
+
+      case "week":
+      case "weeks":
+        let daysFromWeeks = num * 7;
+        if (daysFromWeeks >= 30) {
+          let months = Math.floor(daysFromWeeks / 30);
+          let remainingDays = daysFromWeeks % 30;
+          let weeks = Math.floor(remainingDays / 7);
+          let days = remainingDays % 7;
+          let breakdown = [];
           if (months > 0) breakdown.push(`${months} ${months === 1 ? "Month" : "Months"}`);
           if (weeks > 0) breakdown.push(`${weeks} ${weeks === 1 ? "Week" : "Weeks"}`);
           if (days > 0) breakdown.push(`${days} ${days === 1 ? "Day" : "Days"}`);
-
           result = breakdown.join(", ");
-          break;
+        } else {
+          result = `${daysFromWeeks} ${daysFromWeeks === 1 ? "Day" : "Days"}`;
+        }
+        break;
 
-        default:
-          result = "Unit not recognized. Please use Years, Months, Weeks, or Days.";
-      }
+      case "day":
+      case "days":
+        let totalDays = num;
+        let years = Math.floor(totalDays / 365);
+        totalDays %= 365;
 
-      output.innerHTML = result || "0";
+        let months = Math.floor(totalDays / 30);
+        totalDays %= 30;
+
+        let weeks = Math.floor(totalDays / 7);
+        let days = totalDays % 7;
+
+        let breakdown = [];
+        if (years > 0) breakdown.push(`${years} ${years === 1 ? "Year" : "Years"}`);
+        if (months > 0) breakdown.push(`${months} ${months === 1 ? "Month" : "Months"}`);
+        if (weeks > 0) breakdown.push(`${weeks} ${weeks === 1 ? "Week" : "Weeks"}`);
+        if (days > 0) breakdown.push(`${days} ${days === 1 ? "Day" : "Days"}`);
+
+        result = breakdown.join(", ");
+        break;
+
+      default:
+        result = "Unit not recognized. Please use Years, Months, Weeks, or Days.";
     }
+
+    output.innerHTML = result || "0";
+
+    // Palitan ang button → Reset mode
+    let btn = document.getElementById("mainBtn");
+    btn.innerText = "Reset";
+    btn.onclick = RESET;
+  }
+
+  function RESET() {
+    document.getElementById('value').value = "";
+    document.getElementById('output').innerHTML = "";
+
+    // Balik ulit sa Convert mode
+    let btn = document.getElementById("mainBtn");
+    btn.innerText = "Convert";
+    btn.onclick = convert;
+  }
+
   </script>
 </body>
 </html>
